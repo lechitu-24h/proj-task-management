@@ -7,9 +7,10 @@ import { Logger } from '@nestjs/common';
 async function bootstrap() {
   const logger = new Logger();
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new TransformInterceptor());
-  const post = 3000;
+  const post = process.env.PORT;
   await app.listen(post);
   logger.log(`Application listening on post ${post}`);
 }
